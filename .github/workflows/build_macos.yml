@@ -12,8 +12,18 @@ jobs:
           channel: 'stable'
       - run: flutter --version
       - name: Create rhttp directory structure to resolve dependency
-        run: mkdir -p ../rhttp/rhttp/lib
-      - run: echo 'name: rhttp\ndescription: A new Dart package\nversion: 0.0.1\nenvironment:\n  sdk: ">=3.0.0 <4.0.0"\ndependencies:\n  flutter:\n    sdk: flutter\n' > ../rhttp/rhttp/pubspec.yaml
+        run: |
+          mkdir -p ../rhttp/rhttp/lib
+          cat > ../rhttp/rhttp/pubspec.yaml << 'EOF'
+          name: rhttp
+          description: A new Dart package
+          version: 0.0.1
+          environment:
+            sdk: ">=3.0.0 <4.0.0"
+          dependencies:
+            flutter:
+              sdk: flutter
+          EOF
       - run: flutter pub get
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - run: flutter build macos --release
