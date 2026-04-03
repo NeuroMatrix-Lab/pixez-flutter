@@ -13,8 +13,6 @@ jobs:
       - run: flutter --version
       - name: Enable macOS desktop support
         run: flutter config --enable-macos-desktop
-      - name: Add macOS platform to existing project
-        run: flutter create --platforms=macos .
       - name: Create rhttp directory structure to resolve dependency
         run: |
           mkdir -p ../rhttp/rhttp/lib
@@ -28,6 +26,8 @@ jobs:
             flutter:
               sdk: flutter
           EOF
+      - name: Add macOS platform to existing project
+        run: flutter create --platforms=macos .
       - run: flutter pub get
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - run: flutter build macos --release
