@@ -11,6 +11,10 @@ jobs:
         with:
           channel: 'stable'
       - run: flutter --version
+      - name: Enable macOS desktop support
+        run: flutter config --enable-macos-desktop
+      - name: Add macOS platform to existing project
+        run: flutter create --platforms=macos .
       - name: Create rhttp directory structure to resolve dependency
         run: |
           mkdir -p ../rhttp/rhttp/lib
